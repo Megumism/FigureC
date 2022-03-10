@@ -1,11 +1,10 @@
-#include <stdlib.h>
-/* File name:   bmpTest.c
+/* File name:   bmp_read.c
    Description: Show all Info a bmp file has. including
    FileHeader Info, InfoHeader Info and Data Part.
    Reference: BMP图像数据的C语言读取源码
 */
 
-// #include "stdafx.h"
+#include <stdlib.h>
 #include <stdio.h>
 
 #define BITMAPFILEHEADERLENGTH 14  // The bmp FileHeader length is 14
@@ -159,10 +158,8 @@ void bmpInfoHeader(FILE* fpbmp) {
 
 /* Show the Data Part of bmp file */
 void bmpDataPart(FILE* fpbmp) {
+
     int i, j;
-    //     unsigned char bmpPixel[BmpWidth][BmpHeight];
-    // unsigned char bmpPixel[4][16];
-    //因为暂时还未找到好的方法，暂且长和宽都设为1000，如果图像的尺寸大于1000，则要重新设置
 
     unsigned char* bmpPixelTmp = NULL;
     FILE* fpDataBmp;
@@ -193,8 +190,6 @@ void bmpDataPart(FILE* fpbmp) {
     for (i = 0; i < BmpHeightOfByte; i++) {
         fprintf(fpDataBmp, "The data in line %-3d:\n", i + 1);
         for (j = 0; j < BmpWidthOfByte; j++) {
-            // bmpPixel[i][j] =
-            //     bmpPixelTmp[BmpWidthOfByte * (BmpHeightOfByte - 1 - i) + j];
             fprintf(
                 fpDataBmp, "%-3d ",
                 bmpPixelTmp[BmpWidthOfByte * (BmpHeightOfByte - 1 - i) + j]);
